@@ -1,0 +1,158 @@
+/* Photo carousel for invitation.html
+   Hidden until the ribbon is tapped (.invitation-scene gets .is-open). */
+
+.gallery {
+    display: none;
+    position: relative;
+    z-index: 2;
+    width: min(92%, 380px);
+    margin: 34px auto 0;
+    text-align: center;
+}
+
+.invitation-scene.is-open ~ .gallery {
+    display: block;
+    animation: galleryIn 0.9s ease 1s both;   /* waits for the invitation to slide out */
+}
+
+@keyframes galleryIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.gallery-eyebrow {
+    margin: 0;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--pink-main);
+}
+
+.gallery h2 {
+    margin: 8px 0 16px;
+    font-size: clamp(22px, 5.5vw, 30px);
+    font-weight: 700;
+    color: var(--pink-deep);
+}
+
+/* Square carousel: one photo at a time, one row. The width never exceeds the
+   screen width or 75% of the screen height, so it fits phones (portrait or
+   landscape), tablets and desktops. */
+.carousel {
+    position: relative;
+    width: min(100%, 75vh);
+    margin: 0 auto;
+}
+
+.carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    border-radius: 22px;
+    border: 3px solid #fff;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(201, 87, 138, 0.22);
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    margin: 0;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+
+.carousel-slide img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--pink-deep);
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.carousel-arrow:active {
+    transform: scale(0.94);
+}
+
+.carousel-prev { left: 8px; }
+.carousel-next { right: 8px; }
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin: 14px 0 0;
+}
+
+.carousel-dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--pink-line);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.carousel-dot.is-active {
+    background: var(--pink-main);
+    transform: scale(1.3);
+}
+
+.carousel-save {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 11px 24px;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    background: var(--pink-main);
+    border-radius: 999px;
+    box-shadow: 0 5px 16px rgba(201, 87, 138, 0.3);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.carousel-save:active {
+    transform: scale(0.97);
+}
+
+.carousel-note {
+    margin: 10px 0 0;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track { scroll-behavior: auto; }
+    .invitation-scene.is-open ~ .gallery { animation: none; }
+}

@@ -1,0 +1,451 @@
+/* =====================================
+   THEME (matches index.html)
+===================================== */
+
+:root {
+    --pink-deep: #c9578a;
+    --pink-main: #d8749e;
+    --pink-soft: #e9a3bd;
+    --pink-line: #f3c4d5;
+    --pink-bg-top: #fffafc;
+    --pink-bg-bottom: #ffd9e6;
+    --gold: #e8a85c;
+    --text-soft: #b86a8b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.invitation-page {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0 0 40px;
+    overflow-x: hidden;
+    font-family: "Playfair Display", Georgia, serif;
+    color: var(--pink-deep);
+    text-align: center;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.9), transparent 45%),
+        linear-gradient(180deg, var(--pink-bg-top) 0%, #ffeef4 45%, var(--pink-bg-bottom) 100%);
+    background-attachment: fixed;
+}
+
+/* =====================================
+   TOP WELCOME SECTION
+===================================== */
+
+.invitation-welcome {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 34px 18px 22px;
+}
+
+.invitation-welcome .eyebrow {
+    margin: 0;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--pink-main);
+}
+
+.heart-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 14px auto 18px;
+    max-width: 380px;
+}
+
+.heart-divider span {
+    flex: 1;
+    height: 1px;
+    background: var(--pink-line);
+}
+
+.heart-divider b {
+    font-size: 13px;
+    line-height: 1;
+    color: var(--pink-soft);
+}
+
+.invitation-welcome h1 {
+    margin: 0 0 10px;
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--pink-deep);
+}
+
+.invitation-intro {
+    max-width: 440px;
+    margin: 0 auto;
+    font-size: clamp(15px, 3.6vw, 19px);
+    line-height: 1.6;
+    color: var(--text-soft);
+}
+
+/* =====================================
+   INVITATION SCENE
+   Order: 2.png → cover → content.png → ribbon
+   Everything is block-level in one column, so there are no gaps.
+===================================== */
+
+.invitation-scene {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(90%, 340px);
+    margin: 8px auto 0;
+}
+
+.invitation-scene img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    border: 0;
+}
+
+/* Cover: always visible, always above the sliding images */
+.invitation-cover {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    object-fit: contain;
+}
+
+/* --- Slots: height grows from 0 when opened --- */
+
+.slot {
+    display: grid;
+    grid-template-rows: 0fr;
+    width: 100%;
+    transition: grid-template-rows 1.1s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.slot-inner {
+    min-height: 0;
+    overflow: hidden;        /* hides the image while it is "inside" the cover */
+}
+
+.is-open .slot {
+    grid-template-rows: 1fr;
+}
+
+/* --- 2.png: rises up out of the cover --- */
+
+.reveal-baby {
+    width: 55%;
+    margin: 0 auto !important;
+    opacity: 0;
+    transform: translateY(100%);
+    transition:
+        transform 1.1s cubic-bezier(0.22, 0.8, 0.3, 1),
+        opacity 0.7s ease;
+}
+
+.is-open .reveal-baby {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- content.png: slides down out of the cover --- */
+
+.reveal-content {
+    width: 100%;
+    margin: 0 auto !important;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition:
+        transform 1.1s cubic-bezier(0.22, 0.8, 0.3, 1),
+        opacity 0.7s ease;
+}
+
+.is-open .reveal-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Flip card: content.png (front) and back.png (back) --- */
+
+.flip-card {
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.flip-card:focus-visible {
+    outline: 2px solid var(--pink-deep);
+    outline-offset: 4px;
+}
+
+.flip-inner {
+    position: relative;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.flip-card.is-flipped .flip-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-face {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Front decides the card size, the back fills the same box */
+.flip-front {
+    position: relative;
+    width: 100%;
+}
+
+.invitation-scene .flip-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: rotateY(180deg);
+}
+
+/* Small pill so guests know the card can be flipped (no layout space used) */
+.flip-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    z-index: 2;
+    padding: 5px 12px;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: #fff;
+    background: rgba(201, 87, 138, 0.88);
+    border-radius: 999px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.flip-card.was-flipped .flip-hint {
+    opacity: 0;
+}
+
+/* Once the slide-out is done, don't clip the card while it turns */
+.is-settled .slot-inner {
+    overflow: visible;
+}
+
+/* --- Ribbon: right under the cover, rides down with content.png --- */
+
+.ribbon-trigger {
+    position: relative;
+    z-index: 4;
+    display: block;
+    width: 26%;
+    max-width: 84px;
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    animation: ribbonWiggle 2.4s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+.ribbon-trigger img {
+    width: 100%;
+}
+
+.ribbon-trigger:focus-visible {
+    outline: 2px solid var(--pink-deep);
+    outline-offset: 4px;
+}
+
+.ribbon-trigger:disabled {
+    cursor: default;
+    animation: none;
+}
+
+@keyframes ribbonWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    15%      { transform: rotate(-5deg); }
+    30%      { transform: rotate(4deg); }
+    45%      { transform: rotate(-2deg); }
+    60%      { transform: rotate(0deg); }
+}
+
+/* Hint text under the scene */
+
+.ribbon-hint {
+    position: relative;
+    z-index: 2;
+    margin: 14px 0 0;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--pink-main);
+    transition: opacity 0.4s ease;
+}
+
+.ribbon-hint.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.invitation-footer {
+    position: relative;
+    z-index: 2;
+    max-width: 90%;
+    margin: 36px auto 0;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--pink-main);
+}
+
+.invitation-footer span {
+    margin: 0 8px;
+    font-size: 13px;
+    color: var(--pink-soft);
+}
+
+/* =====================================
+   DECORATIONS (hearts, stars, clouds)
+===================================== */
+
+.decor {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.deco {
+    position: absolute;
+    line-height: 1;
+    animation: floaty 6s ease-in-out infinite;
+}
+
+.heart         { color: var(--pink-soft); opacity: 0.8; }
+.heart-outline { color: var(--pink-main); opacity: 0.8; }
+.star          { color: var(--gold);      opacity: 0.9; }
+
+.d1 { top: 18%; left: 8%;  font-size: 20px; animation-delay: 0s; }
+.d2 { top: 30%; right: 9%; font-size: 26px; animation-delay: 1s; }
+.d3 { top: 12%; right: 20%; font-size: 22px; animation-delay: 2s; }
+.d4 { top: 62%; left: 6%;  font-size: 18px; animation-delay: 1.5s; }
+.d5 { top: 78%; right: 12%; font-size: 24px; animation-delay: 0.5s; }
+.d6 { top: 86%; left: 18%; font-size: 24px; animation-delay: 2.5s; }
+
+.cloud {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 999px;
+    animation: none;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.c1 {
+    right: -30px;
+    bottom: 8%;
+    width: 150px;
+    height: 46px;
+}
+
+.c1::before { width: 60px; height: 60px; left: 22px; top: -30px; }
+.c1::after  { width: 46px; height: 46px; left: 70px; top: -20px; }
+
+.c2 {
+    left: -40px;
+    top: 40%;
+    width: 110px;
+    height: 34px;
+    opacity: 0.7;
+}
+
+.c2::before { width: 44px; height: 44px; left: 16px; top: -22px; }
+.c2::after  { width: 34px; height: 34px; left: 52px; top: -14px; }
+
+@keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-9px); }
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 700px) {
+    .invitation-welcome {
+        padding: 26px 14px 18px;
+    }
+
+    .invitation-welcome .eyebrow {
+        font-size: 11px;
+    }
+
+    .invitation-scene {
+        width: min(86%, 320px);
+    }
+
+    .invitation-footer {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+    .invitation-welcome h1 {
+        font-size: 25px;
+    }
+
+    .invitation-scene {
+        width: min(90%, 280px);
+    }
+
+    .ribbon-trigger {
+        max-width: 66px;
+    }
+}
+
+/* Reduce motion when requested */
+
+@media (prefers-reduced-motion: reduce) {
+    .slot,
+    .reveal-baby,
+    .reveal-content,
+    .flip-inner {
+        transition-duration: 0.01ms;
+    }
+
+    .ribbon-trigger,
+    .deco {
+        animation: none;
+    }
+}

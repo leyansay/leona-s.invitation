@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leona's Birthday &amp; Christening ♡</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="invitation.css">
+    <link rel="stylesheet" href="voice.css">
+    <link rel="stylesheet" href="carousel.css">
+</head>
+
+<body class="invitation-page">
+
+    <!-- Soft decorations (same feel as index.html) -->
+    <div class="decor" aria-hidden="true">
+        <span class="deco heart  d1">♥</span>
+        <span class="deco heart-outline d2">♡</span>
+        <span class="deco star   d3">★</span>
+        <span class="deco heart  d4">♥</span>
+        <span class="deco star   d5">★</span>
+        <span class="deco heart-outline d6">♡</span>
+        <span class="deco cloud  c1"></span>
+        <span class="deco cloud  c2"></span>
+    </div>
+
+    <!-- TOP WELCOME SECTION -->
+    <section class="invitation-welcome">
+        <p class="eyebrow">A LITTLE INVITATION FULL OF LOVE</p>
+
+        <div class="heart-divider">
+            <span></span>
+            <b>♥</b>
+            <span></span>
+        </div>
+
+        <h1 id="welcomeMessage">You're Invited! ♡</h1>
+
+        <p class="invitation-intro">
+            You are warmly invited to celebrate our little princess, Leona.
+        </p>
+    </section>
+
+    <!--
+        INVITATION SCENE
+        Stack order, top to bottom, no gaps:
+        2.png → front.png (cover) → content.png → 3.png (ribbon)
+    -->
+    <main class="invitation-scene" id="invitationScene">
+
+        <!-- 2.png slot: collapsed until opened, grows upward out of the cover -->
+        <div class="slot slot-top">
+            <div class="slot-inner">
+                <img src="image/2.png" class="reveal-baby" alt="Baby Leona">
+            </div>
+        </div>
+
+        <!-- Cover (always visible, sits above the two slots visually) -->
+        <img
+            src="image/front.png"
+            class="invitation-cover"
+            alt="Leona's invitation cover"
+        >
+
+        <!-- content.png slot: collapsed until opened, grows downward out of the cover.
+             Tap the card to flip it and see back.png (godfathers and godmothers). -->
+        <div class="slot slot-bottom">
+            <div class="slot-inner">
+                <div
+                    class="flip-card reveal-content"
+                    id="flipCard"
+                    role="button"
+                    tabindex="0"
+                    aria-pressed="false"
+                    aria-label="Flip the card to see the godparents"
+                >
+                    <div class="flip-inner">
+                        <img src="image/content.png" class="flip-face flip-front" alt="Invitation details">
+                        <img src="image/back.png" class="flip-face flip-back" alt="Our godfathers and godmothers">
+                    </div>
+                    <span class="flip-hint" id="flipHint">Tap to see the godparents ♡</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ribbon: directly under the cover, then pushed down by content.png -->
+        <button
+            class="ribbon-trigger"
+            id="ribbonTrigger"
+            type="button"
+            aria-label="Pull the ribbon to reveal the invitation"
+        >
+            <img src="image/3.png" alt="">
+        </button>
+
+    </main>
+
+    <p class="ribbon-hint" id="ribbonHint">Tap the ribbon ♡</p>
+
+    <!-- PHOTO CAROUSEL (appears after the ribbon is tapped).
+         Put your photos in the image/ folder (img1.jpg to img5.jpg) and edit the list below if needed:
+         one <figure> per photo. Keep each file around 200-400 KB. -->
+    <section class="gallery" aria-label="Photos of Leona">
+        <p class="gallery-eyebrow">LEONA'S LITTLE MOMENTS</p>
+        <h2>Photos you can keep ♡</h2>
+
+        <div class="carousel">
+            <div class="carousel-track" id="carouselTrack" tabindex="0">
+                <figure class="carousel-slide">
+                    <img src="image/img1.jpg" alt="Leona photo 1" loading="lazy">
+                </figure>
+                <figure class="carousel-slide">
+                    <img src="image/img2.jpg" alt="Leona photo 2" loading="lazy">
+                </figure>
+                <figure class="carousel-slide">
+                    <img src="image/img3.jpg" alt="Leona photo 3" loading="lazy">
+                </figure>
+                <figure class="carousel-slide">
+                    <img src="image/img4.jpg" alt="Leona photo 4" loading="lazy">
+                </figure>
+                <figure class="carousel-slide">
+                    <img src="image/img5.jpg" alt="Leona photo 5" loading="lazy">
+                </figure>
+            </div>
+
+            <button class="carousel-arrow carousel-prev" id="carouselPrev" type="button" aria-label="Previous photo">‹</button>
+            <button class="carousel-arrow carousel-next" id="carouselNext" type="button" aria-label="Next photo">›</button>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+
+        <a class="carousel-save" id="carouselSave" href="#" download>Save this photo ♡</a>
+        <p class="carousel-note">Swipe to see more. On some phones, press and hold the photo to save it.</p>
+    </section>
+
+    <footer class="invitation-footer">
+        <span>♥</span>
+        Made with love for Leona's 1st Birthday &amp; Christening
+        <span>♥</span>
+    </footer>
+
+    <!-- Mute / play button for the background music (shown after the ribbon is tapped) -->
+    <button id="voiceBtn" class="voice-btn" type="button" hidden>🔇</button>
+
+    <!-- Must come BEFORE the inline script below, so LeonaVoice exists on ribbon click -->
+    <script src="voice.js"></script>
+    <script src="carousel.js"></script>
+    <script>
+        const welcomeMessage = document.getElementById("welcomeMessage");
+        const ribbon = document.getElementById("ribbonTrigger");
+        const scene = document.getElementById("invitationScene");
+        const hint = document.getElementById("ribbonHint");
+
+        // Name saved from index.html
+        let guestName = "";
+        try {
+            guestName = sessionStorage.getItem("godparentName") ||
+                        localStorage.getItem("godparentName") || "";
+        } catch (e) {
+            guestName = "";
+        }
+
+        welcomeMessage.textContent = guestName.trim() !== ""
+            ? `Welcome, ${guestName.trim()}! ♡`
+            : "You're Invited! ♡";
+
+        ribbon.addEventListener("click", function () {
+            if (scene.classList.contains("is-open")) return;
+
+            // Start the looping music (works because this is a real tap)
+            if (window.LeonaVoice) LeonaVoice.start();
+
+            scene.classList.add("is-open");
+            ribbon.disabled = true;
+            ribbon.setAttribute("aria-label", "Invitation opened");
+            hint.classList.add("is-hidden");
+
+            // After the slide-out finishes, let the card flip without being clipped
+            setTimeout(function () {
+                scene.classList.add("is-settled");
+            }, 1200);
+        });
+
+        // Flip card (content.png <-> back.png)
+        const flipCard = document.getElementById("flipCard");
+
+        function toggleFlip() {
+            if (!scene.classList.contains("is-open")) return;
+            const flipped = flipCard.classList.toggle("is-flipped");
+            flipCard.setAttribute("aria-pressed", flipped ? "true" : "false");
+            flipCard.classList.add("was-flipped");
+        }
+
+        flipCard.addEventListener("click", toggleFlip);
+        flipCard.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggleFlip();
+            }
+        });
+    </script>
+
+</body>
+</html>

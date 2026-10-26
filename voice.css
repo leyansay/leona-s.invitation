@@ -1,0 +1,11 @@
+.voice-btn {
+    position: fixed; right: 16px; bottom: 16px; z-index: 10;
+    width: 46px; height: 46px; padding: 0;
+    font-size: 20px; line-height: 1; color: #fff;
+    background: rgba(201, 87, 138, 0.92);
+    border: 0; border-radius: 50%;
+    box-shadow: 0 4px 14px rgba(201, 87, 138, 0.35);
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.voice-btn[hidden] { display: none; }
+.voice-btn:active { transform: scale(0.94); }

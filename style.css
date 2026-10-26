@@ -1,0 +1,649 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* =====================================
+   GLOBAL STYLES
+===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #b9547c;
+    background: #fff0f5;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* =====================================
+   INDEX / NAME ENTRY PAGE
+===================================== */
+
+.page {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding: clamp(24px, 4vh, 45px) clamp(12px, 3vw, 24px) 30px;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 10% 15%, #ffffff 0%, transparent 28%),
+        radial-gradient(ellipse at 90% 80%, #ffdce9 0%, transparent 35%),
+        linear-gradient(135deg, #fff6f8, #ffe7ef 55%, #fff1f5);
+}
+
+.page::before,
+.page::after {
+    content: "☁";
+    position: absolute;
+    z-index: -1;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: Georgia, serif;
+    font-size: 180px;
+    pointer-events: none;
+}
+
+.page::before {
+    top: 20px;
+    left: -50px;
+}
+
+.page::after {
+    bottom: 0;
+    right: -50px;
+}
+
+.heading,
+.welcome-box,
+footer {
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    margin: 8px 0 14px;
+    color: #cf668e;
+    font-family: Arial, sans-serif;
+    font-size: clamp(10px, 1.1vw, 14px);
+    letter-spacing: clamp(1px, 0.2vw, 2px);
+}
+
+.heart-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #e68aac;
+    margin: 0 auto 18px;
+}
+
+.heart-divider span {
+    width: min(18vw, 180px);
+    height: 1px;
+    background: #ed9fbb;
+}
+
+h1 {
+    max-width: 760px;
+    margin: 16px auto;
+    color: #c95885;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(25px, 3.2vw, 43px);
+    font-weight: 400;
+    line-height: 1.2;
+    overflow-wrap: break-word;
+}
+
+.intro {
+    margin: 14px 0 25px;
+    color: #b77892;
+    font-size: clamp(15px, 1.7vw, 22px);
+    line-height: 1.5;
+}
+
+.welcome-box {
+    width: min(100%, 720px);
+    margin: 24px auto;
+    padding: clamp(18px, 3vw, 30px);
+    border: 2px solid #ffd0e0;
+    border-radius: clamp(20px, 3vw, 32px);
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 8px 30px rgba(199, 104, 144, 0.06);
+    backdrop-filter: blur(3px);
+}
+
+.welcome-box h2 {
+    margin: 0 0 12px;
+    color: #c95885;
+    font-size: clamp(17px, 1.8vw, 24px);
+    line-height: 1.4;
+}
+
+.welcome-box p {
+    margin: 12px 0 22px;
+    color: #c17c98;
+    font-size: clamp(14px, 1.5vw, 19px);
+}
+
+input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: clamp(13px, 2vw, 18px);
+    border: 2px solid #ffc8dc;
+    border-radius: 50px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.8);
+    color: #a65375;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #df8cab;
+}
+
+input:focus {
+    border-color: #d9789d;
+    box-shadow: 0 0 0 3px #fce0eb;
+}
+
+input,
+button {
+    max-width: 100%;
+    font-family: inherit;
+    font-size: clamp(14px, 1.5vw, 18px);
+}
+
+button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    margin-top: 16px;
+    padding: clamp(13px, 2vw, 17px);
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(100deg, #e47da5, #d76d98);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px #d76d9840;
+}
+
+/* Baby decoration on index page */
+
+.baby-decoration {
+    position: absolute;
+    z-index: 1;
+    top: 135px;
+    left: 12px;
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.footprints {
+    position: absolute;
+    z-index: 1;
+    top: 210px;
+    bottom: 70px;
+    width: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    pointer-events: none;
+}
+
+.footprints img {
+    display: block;
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    opacity: 0.78;
+}
+
+.left-footprints {
+    left: 12%;
+}
+
+.right-footprints {
+    right: 7%;
+}
+
+.left-footprints img:nth-child(even),
+.right-footprints img:nth-child(odd) {
+    align-self: flex-end;
+}
+
+.sparkle {
+    position: absolute;
+    z-index: 1;
+    color: #edb16f;
+    pointer-events: none;
+}
+
+.star-one {
+    top: 15%;
+    left: 17%;
+    font-size: 30px;
+}
+
+.star-two {
+    top: 45%;
+    right: 10%;
+    font-size: 35px;
+}
+
+.star-three {
+    bottom: 13%;
+    left: 20%;
+    font-size: 27px;
+}
+
+.heart-one {
+    top: 30%;
+    right: 16%;
+    color: #ee91b2;
+    font-size: 30px;
+}
+
+.heart-two {
+    bottom: 25%;
+    right: 18%;
+    color: #ee91b2;
+    font-size: 20px;
+}
+
+footer {
+    margin: 35px auto 0;
+    color: #c16c91;
+    font-size: clamp(12px, 1.3vw, 17px);
+}
+
+footer span {
+    margin: 0 12px;
+    color: #e68aac;
+}
+
+/* =====================================
+   INVITATION PAGE — TOP WELCOME
+===================================== */
+
+body.invitation-page {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background:
+        radial-gradient(ellipse at top, #fffafd 0%, transparent 65%),
+        linear-gradient(145deg, #fff7fa, #ffe3ed);
+    color: #ce5685;
+}
+
+.invitation-welcome {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px 25px;
+    text-align: center;
+}
+
+.invitation-page .eyebrow {
+    margin: 0 0 14px;
+    color: #d85c8a;
+    font-family: Arial, sans-serif;
+    font-size: clamp(10px, 1.1vw, 14px);
+    letter-spacing: clamp(1px, 0.2vw, 2px);
+    line-height: 1.7;
+}
+
+.invitation-page .heart-divider {
+    width: min(80%, 400px);
+    margin: 0 auto 18px;
+    gap: 12px;
+}
+
+.invitation-page .heart-divider span {
+    width: auto;
+    flex: 1;
+    height: 1px;
+    background: #ed9fbb;
+}
+
+.invitation-welcome h1 {
+    max-width: 760px;
+    margin: 14px auto;
+    color: #c95885;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(27px, 3.2vw, 42px);
+    line-height: 1.2;
+}
+
+.invitation-intro {
+    max-width: 700px;
+    margin: 12px auto 0;
+    padding: 0 8px;
+    color: #b77892;
+    font-size: clamp(14px, 1.5vw, 19px);
+    line-height: 1.6;
+}
+
+/* =====================================
+   INVITATION COVER AND REVEAL
+===================================== */
+
+.invitation-scene {
+    position: relative;
+    isolation: isolate;
+    width: min(90%, 300px);
+    margin: 0 auto;
+    padding: 0 0 35px;
+    text-align: center;
+}
+
+/* Original front cover remains visible */
+
+.invitation-cover {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+/* Baby image slides up from the cover */
+
+.reveal-baby {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 50%;
+    display: block;
+    width: 40%;
+    max-width: 120px;
+    height: auto;
+    margin: 0;
+    opacity: 0;
+    transform: translate(-50%, 18px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.9s ease;
+    pointer-events: none;
+}
+
+/* Invitation details image slides down */
+
+.reveal-content {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.9s ease;
+    pointer-events: none;
+}
+
+/* Keep the ribbon below the cover before clicking */
+.ribbon-trigger {
+    position: absolute;
+    z-index: 5;
+    top: 97%;
+    left: 50%;
+    display: block;
+    width: 24%;
+    max-width: 72px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.ribbon-trigger img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.ribbon-trigger:hover {
+    transform: translateX(-50%);
+    box-shadow: none;
+}
+
+.ribbon-trigger:focus-visible {
+    outline: 2px solid #c95885;
+    outline-offset: 4px;
+}
+
+/* Ribbon pulls down */
+
+.invitation-scene.is-opening .ribbon-trigger {
+    animation: ribbonPull 0.65s ease-in forwards;
+}
+
+@keyframes ribbonPull {
+    to {
+        top: 108%;
+        opacity: 0;
+    }
+}
+
+/* Show both images after ribbon animation */
+
+.invitation-scene.is-open .reveal-baby {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.invitation-scene.is-open .reveal-content {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.invitation-scene.is-open .ribbon-trigger {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* =====================================
+   RESPONSIVE — TABLETS AND PHONES
+===================================== */
+
+@media (max-width: 700px) {
+    .page {
+        padding: 24px 14px;
+    }
+
+    .heading {
+        max-width: 100%;
+    }
+
+    .page .eyebrow {
+        margin-top: 5px;
+    }
+
+    .page h1 {
+        max-width: 520px;
+        font-size: clamp(25px, 6vw, 34px);
+        margin: 14px auto;
+    }
+
+    .intro {
+        margin-bottom: 22px;
+    }
+
+    .baby-decoration {
+        top: 12px;
+        left: 8px;
+        width: 55px;
+        opacity: 0.55;
+    }
+
+    .welcome-box {
+        width: 100%;
+        margin: 22px auto;
+        padding: 20px 15px;
+        border-radius: 23px;
+    }
+
+    .welcome-box h2 {
+        font-size: clamp(17px, 4.5vw, 21px);
+    }
+
+    .welcome-box p {
+        font-size: 15px;
+        margin-bottom: 18px;
+    }
+
+    .footprints {
+        width: 24px;
+        top: 240px;
+        bottom: 60px;
+    }
+
+    .footprints img {
+        width: 19px;
+        height: 19px;
+    }
+
+    .left-footprints {
+        left: 2px;
+    }
+
+    .right-footprints {
+        right: 2px;
+    }
+
+    .welcome-box,
+    .heading,
+    footer {
+        z-index: 2;
+    }
+
+    footer {
+        max-width: 100%;
+        line-height: 1.8;
+        font-size: 12px;
+    }
+
+    footer span {
+        margin: 0 3px;
+    }
+
+    .star-one {
+        left: 15%;
+    }
+
+    .star-two {
+        right: 7%;
+    }
+
+    .invitation-welcome {
+        padding: 24px 14px 20px;
+    }
+
+    .invitation-welcome h1 {
+        font-size: clamp(25px, 6vw, 34px);
+    }
+
+    .invitation-scene {
+        width: min(82%, 280px);
+    }
+
+    .reveal-baby {
+        max-width: 105px;
+    }
+
+    .reveal-content {
+        max-width: 280px;
+    }
+
+    .ribbon-trigger {
+        max-width: 65px;
+    }
+}
+
+@media (max-width: 380px) {
+    .baby-decoration {
+        display: none;
+    }
+
+    .page {
+        padding: 20px 12px;
+    }
+
+    .page h1 {
+        font-size: 25px;
+    }
+
+    .welcome-box {
+        padding: 18px 12px;
+    }
+
+    .footprints img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .invitation-welcome {
+        padding: 20px 12px 18px;
+    }
+
+    .invitation-scene {
+        width: min(88%, 260px);
+    }
+
+    .reveal-baby {
+        max-width: 95px;
+    }
+
+    .reveal-content {
+        max-width: 260px;
+    }
+
+    .ribbon-trigger {
+        max-width: 58px;
+    }
+}
+
+/* Accessibility: reduce motion when requested */
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-baby,
+    .reveal-content {
+        transition-duration: 0.01ms;
+    }
+
+    .invitation-scene.is-opening .ribbon-trigger {
+        animation-duration: 0.01ms;
+    }
+}
